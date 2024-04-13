@@ -9,10 +9,12 @@ namespace Domain.Mapper
         public void Configure(EntityTypeBuilder<Inquiry> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasMany(s => s.Covers)
-                   .WithOne(t => t.Inquiry)
-                   .HasForeignKey(e => e.InquiryId)
-                   .IsRequired();
+            builder.Property(x => new
+            {
+                x.Title,
+                x.Covers,
+                x.Capital,
+            }).IsRequired();
         }
     }
 }
