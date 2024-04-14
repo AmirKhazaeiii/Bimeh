@@ -12,7 +12,7 @@ namespace Domain.Context
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
-        public DbSet<Inquiry> inquiries { get; set; }
+        public DbSet<Inquiry> Requests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var assemblyWithConfigurations = typeof(InquiryMap).Assembly;

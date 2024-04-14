@@ -9,12 +9,10 @@ namespace Domain.Mapper
         public void Configure(EntityTypeBuilder<Inquiry> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => new
-            {
-                x.Title,
-                x.Covers,
-                x.Capital,
-            }).IsRequired();
+
+            builder.Property(x => x.Title).IsRequired();
+            builder.Property(x => x.Capital).IsRequired();
+            builder.Property(x => x.Covers).IsRequired();
         }
     }
 }

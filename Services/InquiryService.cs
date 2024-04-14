@@ -18,27 +18,26 @@ namespace Services
 
         public List<Inquiry> GetAllRequests()
         {
-            return _context.inquiries.ToList();
+            return _context.Requests.ToList();
         }
 
-        public bool Submit(Inquiry request)
+        public bool Submit(InqueryRequest request)
         {
             try
             {
-                if (ValidateCovers(request.Covers))
-                {
-                    var newInquiry = new Inquiry
-                    {
-                        Title = request.Title,
-                        Covers = request.Covers,
-                        Capital = request.Capital,
-                    };
-                    return true;
-                }
-                else
+                if (!ValidateCovers(request.Covers))
                 {
                     return false;
                 }
+                var newInquiry = new Inquiry(request.Title, request.Covers, request.Capital);
+                var validation = new InquiryValidator();
+                //var validRes = validation.Validate(newInquiry);
+                //if (!validRes.IsValid)
+                //{
+                //    Console.WriteLine(validRes.Errors.FirstOrDefault());
+                //}
+                _context.Requests.Add(newInquiry);
+                return _context.SaveChanges() > 0;
             }
             catch
             {
@@ -57,11 +56,11 @@ namespace Services
 
         //private bool ValidateCovers(List<Cover> covers)
         //{
-            //if (covers.Count == 0)
-            //{
-            //    return false;
-            //}
-            //return true;
+        //if (covers.Count == 0)
+        //{
+        //    return false;
+        //}
+        //return true;
         //}
     }
 }

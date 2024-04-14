@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public class InquiryValidator : AbstractValidator<Inquiry>
+    public class InquiryValidator : AbstractValidator<InqueryRequest>
     {
         public InquiryValidator()
         {
